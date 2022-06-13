@@ -39,11 +39,12 @@ export const CustomButton = ({
   style,
 }: ButtonProps) => {
   const { classes } = useStyles();
+
   let buttonProp = {
+    onClick,
+    variant,
+    style,
     className: classes[variant],
-    onClick: onClick,
-    variant: variant,
-    style: style,
     gradient:
       variant === "gradient"
         ? { from: "#FFC700", to: "#FFAB00", deg: 100 }
