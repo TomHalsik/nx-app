@@ -18,7 +18,7 @@ const useStyles = createStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "90%",
+    width: "94%",
   },
   headerLeft: {
     display: "flex",
@@ -32,12 +32,12 @@ const useStyles = createStyles((theme) => ({
     gap: "8px",
   },
   links: {
-    [theme.fn.smallerThan("sm")]: {
+    [theme.fn.smallerThan("md")]: {
       display: "none",
     },
   },
   burger: {
-    [theme.fn.largerThan("sm")]: {
+    [theme.fn.largerThan("md")]: {
       display: "none",
     },
   },
@@ -59,7 +59,7 @@ const useStyles = createStyles((theme) => ({
   logo: {
     maxWidth: "83px",
     maxHeight: "50px",
-    paddingRight: "30px",
+    paddingRight: "16px",
   },
   activePlayer: {
     color: "white",
@@ -102,7 +102,7 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
             <img className={classes.logo} src="/img/logo.png" />
           </div>
           <div>
-            <Group spacing={8} className={classes.links}>
+            <Group spacing={4} className={classes.links}>
               {items}
             </Group>
           </div>
@@ -112,10 +112,10 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
             opened={opened}
             onClick={() => toggleOpened()}
             className={classes.burger}
-            size="sm"
+            size="md"
             color="#fff"
           />
-          <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+          <MediaQuery smallerThan="md" styles={{ display: "none" }}>
             <div className={classes.headerRight}>
               <div className={classes.activePlayer}>
                 <User size={12} strokeWidth={3} color={"white"} /> 240 joueurs
