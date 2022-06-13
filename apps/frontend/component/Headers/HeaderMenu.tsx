@@ -2,8 +2,7 @@ import React from "react";
 import { createStyles, Header, Group, Burger, MediaQuery } from "@mantine/core";
 import { useBooleanToggle } from "@mantine/hooks";
 import { User } from "tabler-icons-react";
-import { WhiteButton } from "../Buttons/WhiteButton";
-import GradientButton from "../Buttons/GradientButton";
+import { CustomButton } from "../Buttons/CustomButton";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -125,10 +124,14 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
               </div>
 
               <div>
-                <WhiteButton title={"S'inscrire"} link={"/inscription"} />
+                <CustomButton
+                  title={"S'inscrire"}
+                  variant={"white"}
+                  link={"/inscription"}
+                />
               </div>
               <div>
-                <GradientButton children={"Se connecter"} />
+                <CustomButton title={"Se connecter"} variant={"gradient"} />
               </div>
             </div>
           </MediaQuery>
