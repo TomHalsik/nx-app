@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "@galadrim/eslint-config-galadrim-react/next",
+    "@galadrim/eslint-config-galadrim-react/typescript",
+    "@galadrim/eslint-config-galadrim-react/prettier"
+  ],
+  "parserOptions": {
+    "project": ["apps/frontend/tsconfig.?*.json"]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@next/next/no-html-link-for-pages": ["error", "apps/frontend/pages"],
+        "@typescript-eslint/no-unsafe-assignment": 0,
+        "react/no-unescaped-entities": 0
+      }
+    }
+  ],
+  "env": {
+    "jest": true
+  }
+}

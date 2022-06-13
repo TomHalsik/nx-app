@@ -1,0 +1,8 @@
+# dependencies
+/node_modules
+
+#front
+apps/frontend/tsconfig.tsbuildinfo
+
+#dist
+dist

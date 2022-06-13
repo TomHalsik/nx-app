@@ -1,0 +1,27 @@
+{
+  "plugins": [],
+  "extends": ["@galadrim/eslint-config-galadrim-nest"],
+  "parserOptions": {
+    "project": ["apps/backend/tsconfig.*?.json"]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "import/prefer-default-export": "off",
+        "class-methods-use-this": "off",
+        "no-void": "off",
+        "@typescript-eslint/dot-notation": "off",
+        "unicorn/no-abusive-eslint-disable": "off"
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    }
+  ]
+}
