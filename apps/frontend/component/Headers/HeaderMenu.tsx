@@ -121,16 +121,18 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
                 <User size={12} strokeWidth={3} color={"white"} /> 240 joueurs
               </div>
 
-              <div>
-                <CustomButton
-                  title={"S'inscrire"}
-                  variant={"white"}
-                  link={"/inscription"}
-                />
-              </div>
-              <div>
-                <CustomButton title={"Se connecter"} variant={"gradient"} />
-              </div>
+              <CustomButton
+                title={"S'inscrire"}
+                variant={"white"}
+                link={"/inscription"}
+                style={{ display: "block" }}
+              />
+
+              <CustomButton
+                title={"Se connecter"}
+                variant={"gradient"}
+                style={{ display: "block" }}
+              />
             </div>
           </MediaQuery>
         </div>

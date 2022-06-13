@@ -26,8 +26,9 @@ const useStyles = createStyles((theme) => ({
 interface ButtonProps {
   onClick?: React.MouseEventHandler;
   title: string;
-  link?: string;
   variant: string;
+  link?: string;
+  style?: object;
 }
 
 export const CustomButton = ({
@@ -35,21 +36,19 @@ export const CustomButton = ({
   title,
   link,
   variant,
+  style,
 }: ButtonProps) => {
   const { classes } = useStyles();
-  const buttonProp =
-    variant === "white"
-      ? {
-          className: classes.white,
-          onClick: onClick,
-          variant: "white",
-        }
-      : {
-          className: classes.gradient,
-          onClick: onClick,
-          gradient: { from: "#FFC700", to: "#FFAB00", deg: 100 },
-          variant: "gradient",
-        };
+  let buttonProp = {
+    className: classes[variant],
+    onClick: onClick,
+    variant: variant,
+    style: style,
+    gradient:
+      variant === "gradient"
+        ? { from: "#FFC700", to: "#FFAB00", deg: 100 }
+        : {},
+  };
 
   return link ? (
     <Link href={link} passHref>
