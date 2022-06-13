@@ -26,8 +26,8 @@ const useStyles = createStyles((theme) => ({
 interface ButtonProps {
   onClick?: React.MouseEventHandler;
   title: string;
-  link: string | null;
-  variant: string | null;
+  link?: string;
+  variant: string;
 }
 
 export const CustomButton = ({
