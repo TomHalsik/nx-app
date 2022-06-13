@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { createStyles, Button } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
@@ -15,16 +16,24 @@ const useStyles = createStyles((theme) => ({
 
 interface ButtonProps {
   onClick?: React.MouseEventHandler;
-  children: string;
+  title: string;
+  link: string | null;
 }
 
-export const WhiteButton = ({ onClick, children }: ButtonProps) => {
+export const WhiteButton = ({ onClick, title, link }: ButtonProps) => {
   const { classes } = useStyles();
+  const buttonProp = {
+    className: classes.button,
+    onClick: onClick,
+    variant: "white",
+  };
 
-  return (
-    <Button className={classes.button} onClick={onClick} variant="white">
-      {children}
-    </Button>
+  return link ? (
+    <Link href={link} passHref>
+      <Button {...buttonProp}>{title}</Button>
+    </Link>
+  ) : (
+    <Button {...buttonProp}>{title}</Button>
   );
 };
 

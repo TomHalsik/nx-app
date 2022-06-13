@@ -125,7 +125,7 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
               </div>
 
               <div>
-                <WhiteButton children={"S'inscrire"} />
+                <WhiteButton title={"S'inscrire"} link={"/inscription"} />
               </div>
               <div>
                 <GradientButton children={"Se connecter"} />
