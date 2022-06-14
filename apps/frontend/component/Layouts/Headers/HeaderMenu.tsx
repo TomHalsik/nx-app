@@ -6,10 +6,12 @@ import {
   Burger,
   MediaQuery,
   Drawer,
+  Paper,
+  Transition,
 } from "@mantine/core";
-import { useBooleanToggle } from "@mantine/hooks";
+import { useBooleanToggle, useScrollLock } from "@mantine/hooks";
 import { User } from "tabler-icons-react";
-import { CustomButton } from "../Buttons/CustomButton";
+import { CustomButton } from "../../Buttons/CustomButton";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -77,6 +79,13 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+const scaleY = {
+  in: { opacity: 1, transform: "scaleY(1)" },
+  out: { opacity: 0, transform: "scaleY(0)" },
+  common: { transformOrigin: "top" },
+  transitionProperty: "transform, opacity",
+};
+
 interface HeaderSearchProps {
   links: {
     link: string;
@@ -86,7 +95,14 @@ interface HeaderSearchProps {
 
 export function HeaderMenu({ links }: HeaderSearchProps) {
   const [opened, toggleOpened] = useBooleanToggle(false);
+  const [scrollLocked, setScrollLocked] = useScrollLock();
+
   const { classes } = useStyles();
+
+  const toggleMenu = () => {
+    toggleOpened();
+    setScrollLocked((c) => !c);
+  };
 
   const items = links.map((link) => {
     return (
@@ -103,7 +119,7 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
 
   return (
     <>
-      <Header height={66} className={classes.header} mb={120}>
+      <Header height={66} className={classes.header}>
         <div className={classes.container}>
           <div className={classes.headerLeft}>
             <div>
@@ -118,7 +134,7 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
           <div>
             <Burger
               opened={opened}
-              onClick={() => toggleOpened()}
+              onClick={() => toggleMenu()}
               className={classes.burger}
               size="md"
               color="#fff"
@@ -145,16 +161,27 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
             </MediaQuery>
           </div>
         </div>
-        <Drawer
-          position="top"
-          opened={opened}
-          onClose={() => toggleOpened()}
-          padding="xl"
-          size="xl"
-        >
-          test
-        </Drawer>
       </Header>
+      <Transition
+        mounted={opened}
+        transition={scaleY}
+        duration={200}
+        timingFunction="ease"
+      >
+        {(styles) => (
+          <Paper
+            shadow="md"
+            style={{
+              ...styles,
+              width: "100%",
+              background: "yellow",
+              height: "100vh",
+            }}
+          >
+            Dropdown
+          </Paper>
+        )}
+      </Transition>
     </>
   );
 }
