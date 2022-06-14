@@ -21,6 +21,7 @@ const useStyles = createStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    borderBottom: "unset",
   },
   container: {
     display: "flex",
@@ -104,13 +105,26 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
     setScrollLocked((c) => !c);
   };
 
-  const items = links.map((link) => {
+  const headLinks = links.map((link) => {
     return (
       <a
         key={link.label}
         href={link.link}
         className={classes.link}
         onClick={(event) => event.preventDefault()}
+      >
+        {link.label}
+      </a>
+    );
+  });
+
+  const drawerLinks = links.map((link) => {
+    return (
+      <a
+        key={link.label}
+        href={link.link}
+        className={classes.link}
+        onClick={() => toggleOpened()}
       >
         {link.label}
       </a>
@@ -127,7 +141,7 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
             </div>
             <div>
               <Group spacing={4} className={classes.links}>
-                {items}
+                {headLinks}
               </Group>
             </div>
           </div>
@@ -174,11 +188,12 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
             style={{
               ...styles,
               width: "100%",
-              background: "yellow",
+              background:
+                "linear-gradient(102.25deg, #0085FF -0.08%, #00B2FF 100%)",
               height: "100vh",
             }}
           >
-            Dropdown
+            <div style={{ padding: 20 }}>{drawerLinks}</div>
           </Paper>
         )}
       </Transition>

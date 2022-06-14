@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { AssociationForm } from "../component/Forms/association-form";
 import { createStyles, Container } from "@mantine/core";
+import { DefaultLayout } from "../component/Layouts/Default";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
   inscriptionLayout: {
@@ -33,13 +34,15 @@ const Home: NextPage = () => {
       <Head>
         <title>Inscription association</title>
       </Head>
-      <div className={classes.inscriptionLayout}>
-        <img className={classes.logo} src="/img/logo.png" />
-        <h1 className={classes.title}>Ouverture prochaine</h1>
-        <Container size={360}>
-          <AssociationForm />
-        </Container>
-      </div>
+      <DefaultLayout>
+        <div className={classes.inscriptionLayout}>
+          <img className={classes.logo} src="/img/logo.png" />
+          <h1 className={classes.title}>Ouverture prochaine</h1>
+          <Container size={360}>
+            <AssociationForm />
+          </Container>
+        </div>
+      </DefaultLayout>
     </>
   );
 };
