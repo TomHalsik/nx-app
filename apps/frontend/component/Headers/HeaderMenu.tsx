@@ -1,5 +1,12 @@
 import React from "react";
-import { createStyles, Header, Group, Burger, MediaQuery } from "@mantine/core";
+import {
+  createStyles,
+  Header,
+  Group,
+  Burger,
+  MediaQuery,
+  Drawer,
+} from "@mantine/core";
 import { useBooleanToggle } from "@mantine/hooks";
 import { User } from "tabler-icons-react";
 import { CustomButton } from "../Buttons/CustomButton";
@@ -95,48 +102,59 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
   });
 
   return (
-    <Header height={66} className={classes.header} mb={120}>
-      <div className={classes.container}>
-        <div className={classes.headerLeft}>
-          <div>
-            <img className={classes.logo} src="/img/logo.png" />
-          </div>
-          <div>
-            <Group spacing={4} className={classes.links}>
-              {items}
-            </Group>
-          </div>
-        </div>
-        <div>
-          <Burger
-            opened={opened}
-            onClick={() => toggleOpened()}
-            className={classes.burger}
-            size="md"
-            color="#fff"
-          />
-          <MediaQuery smallerThan="md" styles={{ display: "none" }}>
-            <div className={classes.headerRight}>
-              <div className={classes.activePlayer}>
-                <User size={12} strokeWidth={3} color={"white"} /> 240 joueurs
-              </div>
-
-              <CustomButton
-                title={"S'inscrire"}
-                variant={"white"}
-                link={"/inscription"}
-                style={{ display: "block" }}
-              />
-
-              <CustomButton
-                title={"Se connecter"}
-                variant={"gradient"}
-                style={{ display: "block" }}
-              />
+    <>
+      <Header height={66} className={classes.header} mb={120}>
+        <div className={classes.container}>
+          <div className={classes.headerLeft}>
+            <div>
+              <img className={classes.logo} src="/img/logo.png" />
             </div>
-          </MediaQuery>
+            <div>
+              <Group spacing={4} className={classes.links}>
+                {items}
+              </Group>
+            </div>
+          </div>
+          <div>
+            <Burger
+              opened={opened}
+              onClick={() => toggleOpened()}
+              className={classes.burger}
+              size="md"
+              color="#fff"
+            />
+            <MediaQuery smallerThan="md" styles={{ display: "none" }}>
+              <div className={classes.headerRight}>
+                <div className={classes.activePlayer}>
+                  <User size={12} strokeWidth={3} color={"white"} /> 240 joueurs
+                </div>
+
+                <CustomButton
+                  title={"S'inscrire"}
+                  variant={"white"}
+                  link={"/inscription"}
+                  style={{ display: "block" }}
+                />
+
+                <CustomButton
+                  title={"Se connecter"}
+                  variant={"gradient"}
+                  style={{ display: "block" }}
+                />
+              </div>
+            </MediaQuery>
+          </div>
         </div>
-      </div>
-    </Header>
+        <Drawer
+          position="top"
+          opened={opened}
+          onClose={() => toggleOpened()}
+          padding="xl"
+          size="xl"
+        >
+          test
+        </Drawer>
+      </Header>
+    </>
   );
 }

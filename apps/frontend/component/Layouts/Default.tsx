@@ -1,3 +1,4 @@
+import { FooterLinks } from "../Footer/Footer";
 import { HeaderMenu } from "../Headers/HeaderMenu";
 
 export function DefaultLayout() {
@@ -8,5 +9,17 @@ export function DefaultLayout() {
     { link: "/", label: "Associations" },
     { link: "/", label: "Boutique Asso Passion" },
   ];
-  return <HeaderMenu links={links} />;
+  const data = [
+    {
+      title: "test",
+      links: links,
+    },
+  ];
+
+  return (
+    <>
+      <HeaderMenu links={links} />
+      <FooterLinks data={data} />
+    </>
+  );
 }
