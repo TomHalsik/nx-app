@@ -5,7 +5,6 @@ import {
   Group,
   Burger,
   MediaQuery,
-  Drawer,
   Paper,
   Transition,
 } from "@mantine/core";
@@ -164,12 +163,15 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
                   variant={"white"}
                   link={"/inscription"}
                   style={{ display: "block" }}
+                  color={"white"}
                 />
 
                 <CustomButton
                   title={"Se connecter"}
                   variant={"gradient"}
+                  link={"/login"}
                   style={{ display: "block" }}
+                  color={"gradient"}
                 />
               </div>
             </MediaQuery>

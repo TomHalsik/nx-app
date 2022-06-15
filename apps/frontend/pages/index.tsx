@@ -4,11 +4,14 @@ import styles from "./index.module.css";
 
 export function Index() {
   return (
-    <div className={styles.page}>
-      <DefaultLayout>
-        <Demo />
-      </DefaultLayout>
-    </div>
+    <>
+      <title>Asso Passion</title>
+      <div className={styles.page}>
+        <DefaultLayout>
+          <Demo />
+        </DefaultLayout>
+      </div>
+    </>
   );
 }
 

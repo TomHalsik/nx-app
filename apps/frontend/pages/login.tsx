@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { AssociationForm } from "../component/Forms/association-form";
 import { createStyles, Container, Center } from "@mantine/core";
 import { DefaultLayout } from "../component/Layouts/Default";
-import { InscriptionForm } from "../component/Forms/inscription-form";
+import { ConnexionForm } from "../component/Forms/connexion-form";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
   logo: {
@@ -26,18 +27,18 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Inscription</title>
+        <title>Connexion</title>
       </Head>
       <DefaultLayout>
         <Center>
           <img className={classes.logo} src="/img/logo.png" />
         </Center>
         <Center>
-          <h1 className={classes.title}>Inscription</h1>
+          <h1 className={classes.title}>Connexion</h1>
         </Center>
 
         <Container size={360}>
-          <InscriptionForm />
+          <ConnexionForm />
         </Container>
       </DefaultLayout>
     </>

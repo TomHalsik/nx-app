@@ -9,7 +9,6 @@ const get = (uri: string, data, successCallback, failureCallback) => {
   })
     .then((response: any) => {
       if (response.status === 401) {
-        window.location.href = "/login";
       } else {
         return response.json().then((json) => {
           if (successCallback) return successCallback(json);
@@ -33,7 +32,6 @@ const post = (uri, data, successCallback, failureCallback) => {
   })
     .then((response) => {
       if (response.status === 401) {
-        window.location.href = "/login";
       } else if (response.status >= 400) {
         if (failureCallback) return failureCallback(response);
       } else {
