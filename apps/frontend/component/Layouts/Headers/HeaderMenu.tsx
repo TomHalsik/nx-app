@@ -15,6 +15,7 @@ import useUser from "../../hook/useUser";
 import { logout } from "../../../redux/user/userStore";
 import { useDispatch } from "react-redux";
 import Router from "next/router";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -112,27 +113,26 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
 
   const headLinks = links.map((link) => {
     return (
-      <a
-        key={link.label}
-        href={link.link}
-        className={classes.link}
-        onClick={(event) => event.preventDefault()}
-      >
-        {link.label}
-      </a>
+      <Link href={link.link} passHref>
+        <a key={link.label} href={link.link} className={classes.link}>
+          {link.label}
+        </a>
+      </Link>
     );
   });
 
   const drawerLinks = links.map((link) => {
     return (
-      <a
-        key={link.label}
-        href={link.link}
-        className={classes.link}
-        onClick={() => toggleOpened()}
-      >
-        {link.label}
-      </a>
+      <Link href={link.link} passHref>
+        <a
+          key={link.label}
+          href={link.link}
+          className={classes.link}
+          onClick={() => toggleOpened()}
+        >
+          {link.label}
+        </a>
+      </Link>
     );
   });
 
