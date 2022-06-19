@@ -39,19 +39,14 @@ export const InscriptionForm = () => {
   };
 
   const sendData = (data: any) => {
-    API.post(
-      "/user",
-      { data },
-      (result: any) => {
-        console.log("REsult", result);
-        if (result) {
-          toast.success("Votre inscription a été enregistrée avec succès !");
-        } else {
-          toast.error("L'adresse email est déjà utilisée");
-        }
-      },
-      null
-    );
+    API.post("/user", { data }, (result: any) => {
+      console.log("REsult", result);
+      if (result) {
+        toast.success("Votre inscription a été enregistrée avec succès !");
+      } else {
+        toast.error("L'adresse email est déjà utilisée");
+      }
+    });
   };
 
   return (

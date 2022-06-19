@@ -5,6 +5,9 @@ import { createStyles } from "@mantine/core";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import CustomButton from "../Buttons/CustomButton";
+import { login } from "../../redux/user/userStore";
+import { useDispatch } from "react-redux";
+import Router from "next/router";
 
 interface PlayerFormValues {
   email: string;
@@ -23,6 +26,7 @@ const validatePassword = (value: string) => {
 export const ConnexionForm = () => {
   const { classes } = useStyles();
   const [isSubmit, setIsSubmit] = useState(false);
+  const dispatch = useDispatch();
 
   const initialValues: PlayerFormValues = {
     email: "",
@@ -38,22 +42,16 @@ export const ConnexionForm = () => {
     );
   };
 
-  const sendData = (data: any) => {
-    console.log("send", data);
-    console.log({ email: "contact@footedia.com", password: "sakuyer2306" });
-    API.post(
-      "/auth/login",
-      { ...data },
-      (result: any) => {
-        if (result) {
-          console.log(result);
-          toast.success("Connexion réussie");
-        } else {
-          toast.error("L'adresse email ou le mot de passe est incorrect");
-        }
-      },
-      null
-    );
+  const sendData = (data: object) => {
+    API.login({ ...data }, (result: any) => {
+      if (result) {
+        toast.success("Bienvenue !");
+        dispatch(login(result));
+        Router.push("/");
+      } else {
+        toast.error("L'adresse email ou le mot de passe est incorrect");
+      }
+    });
   };
 
   return (

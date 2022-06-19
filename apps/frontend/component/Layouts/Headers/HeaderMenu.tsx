@@ -11,6 +11,10 @@ import {
 import { useBooleanToggle, useScrollLock } from "@mantine/hooks";
 import { User } from "tabler-icons-react";
 import { CustomButton } from "../../Buttons/CustomButton";
+import useUser from "../../hook/useUser";
+import { logout } from "../../../redux/user/userStore";
+import { useDispatch } from "react-redux";
+import Router from "next/router";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -96,6 +100,8 @@ interface HeaderSearchProps {
 export function HeaderMenu({ links }: HeaderSearchProps) {
   const [opened, toggleOpened] = useBooleanToggle(false);
   const [scrollLocked, setScrollLocked] = useScrollLock();
+  const user = useUser();
+  const dispatch = useDispatch();
 
   const { classes } = useStyles();
 
@@ -158,21 +164,36 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
                   <User size={12} strokeWidth={3} color={"white"} /> 240 joueurs
                 </div>
 
-                <CustomButton
-                  title={"S'inscrire"}
-                  variant={"white"}
-                  link={"/inscription"}
-                  style={{ display: "block" }}
-                  color={"white"}
-                />
+                {(!user && (
+                  <>
+                    <CustomButton
+                      title={"S'inscrire"}
+                      variant={"white"}
+                      link={"/signin"}
+                      style={{ display: "block" }}
+                      color={"white"}
+                    />
 
-                <CustomButton
-                  title={"Se connecter"}
-                  variant={"gradient"}
-                  link={"/login"}
-                  style={{ display: "block" }}
-                  color={"gradient"}
-                />
+                    <CustomButton
+                      title={"Se connecter"}
+                      variant={"gradient"}
+                      link={"login"}
+                      style={{ display: "block" }}
+                      color={"gradient"}
+                    />
+                  </>
+                )) || (
+                  <CustomButton
+                    title={"Déconnexion"}
+                    variant={"gradient"}
+                    onClick={() => {
+                      Router.push("/");
+                      dispatch(logout());
+                    }}
+                    style={{ display: "block" }}
+                    color={"gradient"}
+                  />
+                )}
               </div>
             </MediaQuery>
           </div>

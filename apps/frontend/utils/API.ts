@@ -1,14 +1,28 @@
 const apiUrl = "http://localhost:3333/api";
 
-const get = (uri: string, data, successCallback, failureCallback) => {
-  return fetch(`${apiUrl}${uri}?${JSON.stringify(data)}`, {
+function getParams(data: object): string {
+  return Object.keys(data)
+    .map((key: string) => {
+      return `${key}=${encodeURIComponent(String(data[key]))}`;
+    })
+    .join("&");
+}
+
+const get = async (
+  uri: string,
+  data: object,
+  successCallback: (arg?: any) => void
+) => {
+  const params = getParams(data);
+  return fetch(`${apiUrl}${uri}?${params}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   })
-    .then((response: any) => {
+    .then((response: Response) => {
       if (response.status === 401) {
+        window.location.href = "/login";
       } else {
         return response.json().then((json) => {
           if (successCallback) return successCallback(json);
@@ -18,11 +32,14 @@ const get = (uri: string, data, successCallback, failureCallback) => {
     .catch((err) => {
       console.log(uri);
       console.log(err);
-      if (failureCallback) return failureCallback(err);
     });
 };
 
-const post = (uri, data, successCallback, failureCallback) => {
+const post = async (
+  uri: string,
+  data: object,
+  successCallback: (arg?: any) => void
+) => {
   return fetch(`${apiUrl}${uri}`, {
     method: "POST",
     headers: {
@@ -30,10 +47,9 @@ const post = (uri, data, successCallback, failureCallback) => {
     },
     body: JSON.stringify(data),
   })
-    .then((response) => {
+    .then((response: Response) => {
       if (response.status === 401) {
-      } else if (response.status >= 400) {
-        if (failureCallback) return failureCallback(response);
+        window.location.href = "/login";
       } else {
         return response
           .json()
@@ -48,8 +64,35 @@ const post = (uri, data, successCallback, failureCallback) => {
     .catch((err) => {
       console.log(uri);
       console.log(err);
-      if (failureCallback) return failureCallback(err);
     });
 };
 
-export default { get, post };
+const login = async (data: object, successCallback: (arg?: any) => void) => {
+  return fetch(`${apiUrl}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response: Response) => {
+      if (response.status === 401) {
+        return successCallback(null);
+      } else {
+        return response
+          .json()
+          .then((json) => {
+            if (successCallback) return successCallback(json);
+          })
+          .catch(() => {
+            if (successCallback) return successCallback();
+          });
+      }
+    })
+    .catch((err) => {
+      console.log("Login");
+      console.log(err);
+    });
+};
+
+export default { get, post, login };
