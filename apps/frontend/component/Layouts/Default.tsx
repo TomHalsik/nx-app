@@ -1,6 +1,7 @@
 import { FooterApp } from "./Footer/Footer";
 import { HeaderMenu } from "./Headers/HeaderMenu";
 import { AppShell, createStyles } from "@mantine/core";
+import getLinks from "../Utils/Link";
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -13,13 +14,7 @@ const useStyles = createStyles((theme) => ({
 
 export function DefaultLayout({ children }) {
   const { classes } = useStyles();
-  const links = [
-    { link: "/", label: "Lotos" },
-    { link: "/", label: "Qui sommes-nous ?" },
-    { link: "/", label: "Asso News" },
-    { link: "/", label: "Associations" },
-    { link: "/", label: "Boutique Asso Passion" },
-  ];
+  const links = getLinks();
 
   return (
     <AppShell

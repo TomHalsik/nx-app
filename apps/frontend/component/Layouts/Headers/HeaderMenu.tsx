@@ -95,6 +95,7 @@ interface HeaderSearchProps {
   links: {
     link: string;
     label: string;
+    active: boolean;
   }[];
 }
 
@@ -114,7 +115,12 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
   const headLinks = links.map((link) => {
     return (
       <Link href={link.link} passHref>
-        <a key={link.label} href={link.link} className={classes.link}>
+        <a
+          key={link.label}
+          href={link.link}
+          className={classes.link}
+          style={link.active ? { color: "black" } : {}}
+        >
           {link.label}
         </a>
       </Link>
