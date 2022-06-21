@@ -8,10 +8,14 @@ import {
   Paper,
   Transition,
 } from "@mantine/core";
-import { useBooleanToggle, useScrollLock } from "@mantine/hooks";
+import {
+  useBooleanToggle,
+  useScrollLock,
+  useWindowScroll,
+} from "@mantine/hooks";
 import { User } from "tabler-icons-react";
 import { CustomButton } from "../../Buttons/CustomButton";
-import useUser from "../../hook/useUser";
+import useUser from "../../../hook/useUser";
 import { logout } from "../../../redux/user/userStore";
 import { useDispatch } from "react-redux";
 import Router from "next/router";
@@ -19,13 +23,17 @@ import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   header: {
-    background: "linear-gradient(102.25deg, #0085FF -0.08%, #00B2FF 100%)",
-    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+    background: "transparent",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     borderBottom: "unset",
+    transition: "all 0.3s ease-in-out",
+  },
+  headerScroll: {
+    background: "white !important",
+    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
   },
   container: {
     display: "flex",
@@ -101,6 +109,7 @@ interface HeaderSearchProps {
 
 export function HeaderMenu({ links }: HeaderSearchProps) {
   const [opened, toggleOpened] = useBooleanToggle(false);
+  const [scroll, scrollTo] = useWindowScroll();
   const [scrollLocked, setScrollLocked] = useScrollLock();
   const user = useUser();
   const dispatch = useDispatch();
@@ -144,12 +153,23 @@ export function HeaderMenu({ links }: HeaderSearchProps) {
 
   return (
     <>
-      <Header height={66} className={classes.header}>
+      <Header
+        fixed={true}
+        height={66}
+        className={classes.header}
+        style={
+          scroll.y > 25
+            ? {
+                background: "white",
+                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+                transition: "all 0.3s ease-in-out",
+              }
+            : {}
+        }
+      >
         <div className={classes.container}>
           <div className={classes.headerLeft}>
-            <div>
-              <img className={classes.logo} src="/img/logo.png" />
-            </div>
+            <div></div>
             <div>
               <Group spacing={4} className={classes.links}>
                 {headLinks}

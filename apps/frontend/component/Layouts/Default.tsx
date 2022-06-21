@@ -17,13 +17,34 @@ export function DefaultLayout({ children }) {
   const links = getLinks();
 
   return (
-    <AppShell
-      className={classes.container}
-      padding={0}
-      header={<HeaderMenu links={links} />}
-      footer={<FooterApp links={links} />}
-    >
-      <div className={classes.main}>{children}</div>
-    </AppShell>
+    <>
+      <section className="hero-section hero-section-bg section-shaped">
+        <div className="shape shape-style-1 shape-grey">
+          <span className="span-100"></span>
+          <span className="span-50"></span>
+          <span className="span-50"></span>
+          <span className="span-75"></span>
+          <span className="span-100"></span>
+          <span className="span-75"></span>
+          <span className="span-50"></span>
+          <span className="span-100"></span>
+          <span className="span-50"></span>
+          <span className="span-100"></span>
+          <span className="span-75"></span>
+          <span className="span-50"></span>
+          <span className="span-100"></span>
+          <span className="span-50"></span>
+          <span className="span-100"></span>
+        </div>
+        <AppShell
+          className={classes.container}
+          padding={0}
+          header={<HeaderMenu links={links} />}
+          footer={<FooterApp links={links} />}
+        >
+          <div className={classes.main}>{children}</div>
+        </AppShell>
+      </section>
+    </>
   );
 }

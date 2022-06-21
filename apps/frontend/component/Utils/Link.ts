@@ -1,9 +1,7 @@
 const links = [
-  { link: "/", label: "Lotos", active: false },
-  { link: "/signin", label: "Qui sommes-nous ?", active: false },
-  { link: "/login", label: "Asso News", active: false },
-  { link: "/", label: "Associations", active: false },
-  { link: "/", label: "Boutique Asso Passion", active: false },
+  { link: "/", label: "Accueil", active: false },
+  { link: "/signin", label: "Sign in", active: false },
+  { link: "/login", label: "Log in", active: false },
 ];
 
 const getLinks = () => {
